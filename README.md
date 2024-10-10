@@ -289,24 +289,24 @@ Create a GET request to the API on ```http://<PublicIP-or-PublicDNS>:5000/api/to
 
 ## Step 8 - Frontend creation
 1. In the same directory as the backend code, which is the Todo directory
-   ``` bash
+``` bash
    npx create-react-app client
-   ```
+```
 This will create a new folder in your ```Todo``` directory called ```client```
 2. lnstall concurrently
-      ``` bash
+   ``` bash
       npm install concurrently --save-dev
-      ```
+   ```
 3. Install nodemon
-   ``` bash
+``` bash
    npm install nodemon --save-dev
-   ```
+```
 4. Configure nodemon in the package.json in the Todo directory
-   ``` bash
+``` bash
    nano package.json
-   ```
+```
 5. Paste this in the Scripts block:
-   ``` bash
+``` bash
    {
      // ...
      "scripts": {
@@ -316,28 +316,28 @@ This will create a new folder in your ```Todo``` directory called ```client```
      },
      // ...
    }
-   ```
+```
 6. Configure proxy in ``` package.json```
    change directory to ```client```
-   ``` bash
+``` bash
    cd client
-   ```
+```
    Open the package.json file with a command line text editor
-   ``` bash
+``` bash
    nano package.jon
-   ```
+```
    Add the key value pair in the package.json file
-   ``` bash
+``` bash
    {
      "proxy": "http://localhost:5000"
    }
-   ```
+```
    ![proxy](https://github.com/user-attachments/assets/b245bb62-613a-45c5-ae45-a8d13de2a71e)
 7. Run npm run dev and make sure you are in the todo directory and not in the client directory.
 Ensure you are in the ```Todo ``` 
-   ```bash
+```bash
    npm run dev
-   ````
+````
 Your app will be open and running on PublicIP:3000
 ## Step 9 - Creating React Components
 Change to the client directory
@@ -481,9 +481,9 @@ Copy and paste the following code
       export default Todo;
    ```
 6. Adjust the React code by Deleting the logo and adjust App.js:
-   ```bash
+```bash
       cd ..
-    ```
+```
 Make sure that you're in the src folder.
 Open App.js with any text editor.
       ```
@@ -629,7 +629,6 @@ In the Todo directory run:
       ```
 Todo App is ready and fully functional
 
-<img width="1436" alt="my _todo" src="https://github.com/user-at
-tachments/assets/e7f3ce73-4c37-4428-8be9-e5c11b091e8d">
+<img width="1436" alt="my _todo" src="https://github.com/user-attachments/assets/e7f3ce73-4c37-4428-8be9-e5c11b091e8d">
 <img width="1162" alt="todolist_test" src="https://github.com/user-attachments/assets/1304810a-438e-4511-a959-b51ac91253e6">
 
