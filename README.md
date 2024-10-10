@@ -1,6 +1,14 @@
 # MERN WEB STACk
+MERN stack is a full-stack development framework consisting of MongoDB, Express.js, React.js, and Node.js. Each component plays a crucial role in the development of modern web applications:
 
-The project demonstrates the creation of RESTful APIs for handling tasks such as creating, reading, and deleting to-do items, which are stored in a MongoDB database. The integration of React for the front-end provides a responsive user interface, while the back-end services handle data operations efficiently. This project also highlights the deployment of the app on an AWS EC2 instance and secure access via SSH.
+- **MongoDB:** A document-based, No-SQL database used to store application data in a form of documents.
+- **Express.js:** A lightweight and flexible web application framework for Node.js. 
+- **React.js:** A powerful JavaScript library for building user interfaces. It allows developers to create dynamic and responsive front-end components.
+- **Node.js:** A runtime environment that allows JavaScript to be executed server-side.
+
+The MERN stack provides an end-to-end solution for full-stack JavaScript development, enabling seamless interaction between the front-end and back-end. 
+
+This project leverages MERN to create a robust and responsive To-Do application.The project demonstrates the creation of RESTful APIs for handling tasks such as creating, reading, and deleting to-do items, which are stored in a MongoDB database. The integration of React for the front-end provides a responsive user interface, while the back-end services handle data operations efficiently. This project also highlights the deployment of the app on an AWS EC2 instance and secure access via SSH.
 
 ## Prerequisites
 
