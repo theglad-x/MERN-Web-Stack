@@ -7,7 +7,7 @@
 ![Connect to instance](https://github.com/user-attachments/assets/2e10ae98-611e-428c-8bb7-ff8192a6efbb)
 
 ![Running Instance](https://github.com/user-attachments/assets/8cd31174-d727-443d-8050-8e75b2884c19)
-#ssh to the instance using
+# ssh to the instance using
 ![ssh](https://github.com/user-attachments/assets/7d7d10ac-c3b7-44eb-b489-159037c2f282)
 
 ## Step 1 - Backend Configuration
@@ -215,7 +215,6 @@ Connect to the mongodb database using [mlab](https://www.mongodb.com/products/tr
 ![mongo-cluster](https://github.com/user-attachments/assets/9d716719-7d5a-435f-b247-73ffced5d8aa)
 4. Create a user and give it admin access. Click on ```database Access``` on the left sidebar.
 ![mongo-database](https://github.com/user-attachments/assets/05f04a8a-6cb6-432d-8d64-cbbbb74cb06a)
-![mongo-cluster](https://github.com/user-attachments/assets/19d2b078-0270-43f5-9d66-20ae07fdba09)
 ![mongo-detabase-access](https://github.com/user-attachments/assets/d44652af-3d59-4109-b181-036739fc49b9)
 5. Click on ```Browse collection```, to create a database.
 ![mongo-cluster](https://github.com/user-attachments/assets/ab94ed27-9ca3-4ac8-8699-8a0bc0bfb228)
@@ -229,9 +228,9 @@ Connect to the mongodb database using [mlab](https://www.mongodb.com/products/tr
      touch .env
    ```
 11. Open the ```.env``` file with a text editor and paste the connection string
-    ``` bash
+   ``` bash
     DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites=true&w=majority'
-    ```
+   ```
 12. Update the ```index.js``` to reflect the use of ```.env``` so that Node.js can connect to the databse.
    ``` bash
           const mongoose = require('mongoose');
@@ -271,9 +270,9 @@ Connect to the mongodb database using [mlab](https://www.mongodb.com/products/tr
           });
    ```
 13. Start the server to see if the database is successfully configured
-    ``` bash
+   ``` bash
     node index.js
-    ```
+   ```
 ![mongodb](https://github.com/user-attachments/assets/56d00154-b84c-44bb-b65f-98b052928d87)
 ## Step 7 - Test Backend Code without Frontend using RESTful API
 Test the code using RESTfulL API. 
@@ -338,4 +337,297 @@ Ensure you are in the ```Todo ```
 npm run dev
 ````
 Your app will be open and running on PublicIP:3000
+## Step 9 - Creating React Components
+1. Change to the client directory
+   ```bash
+   cd client
+   ```
+2. Move to the src directory
+   ```bash
+   src
+   ```
+3. Inside your ```src``` folder create another folder called ```components``` and inside it create three files ```Input.js, ListTodo.js, and Todo.js```.
+   ```bash
+   cd client && cd src && mkdir components && cd components
+
+   touch Input.js ListTodo.js Todo.js
+   ```
+4. Open ```Input.js```file
+   ```bash
+   nano Input.js
+   ```
+   Copy and paste the following code
+   ```bash
+   import React, { Component } from 'react';
+   import axios from 'axios';
+   
+   import Input from './Input';
+   import ListTodo from './ListTodo';
+   
+   class Todo extends Component {
+     state = {
+       todos: []
+     }
+   
+     componentDidMount() {
+       this.getTodos();
+     }
+   
+     getTodos = () => {
+       axios.get('/api/todos')
+         .then(res => {
+           if (res.data) {
+             this.setState({
+               todos: res.data
+             });
+           }
+         })
+         .catch(err => console.log(err));
+     }
+   
+     deleteTodo = (id) => {
+       axios.delete(`/api/todos/${id}`)
+         .then(res => {
+           if (res.data) {
+             this.getTodos();
+           }
+         })
+         .catch(err => console.log(err));
+     }
+   
+     render() {
+       let { todos } = this.state;
+       return (
+         <div>
+           <h1>My Todo(s)</h1>
+           <Input getTodos={this.getTodos} />
+           <ListTodo todos={todos} deleteTodo={this.deleteTodo} />
+         </div>
+       );
+     }
+   }
+   export default Todo;
+   ```
+To make use of axios, which is a Promise-based HTTP client for the browser and node.js, you will need to navigate to the client directory from the terminal and run yarn add axios or npm install axios.
+
+5. Move to client folder
+   ``` bash
+   cd ../..
+   ```
+Install Axios
+   ```bash
+   npm install axios
+   ```
+Go back to the component directory
+   ```bash
+   cd src/components
+   ```
+open the ```ListTodo.js
+   ```bash
+   nano ListTodo.js
+   ```
+Copy and paste the following code
+   ``` bash
+   import React, { Component } from 'react';
+   import axios from 'axios';
+   
+   import Input from './Input';
+   import ListTodo from './ListTodo';
+   
+   class Todo extends Component {
+     state = {
+       todos: []
+     }
+   
+     componentDidMount() {
+       this.getTodos();
+     }
+   
+     getTodos = () => {
+       axios.get('/api/todos')
+         .then(res => {
+           if (res.data) {
+             this.setState({
+               todos: res.data
+             });
+           }
+         })
+         .catch(err => console.log(err));
+     }
+   
+     deleteTodo = (id) => {
+       axios.delete(`/api/todos/${id}`)
+         .then(res => {
+           if (res.data) {
+             this.getTodos();
+           }
+         })
+         .catch(err => console.log(err));
+     }
+   
+     render() {
+       let { todos } = this.state;
+       return (
+         <div>
+           <h1>My Todo(s)</h1>
+           <Input getTodos={this.getTodos} />
+           <ListTodo todos={todos} deleteTodo={this.deleteTodo} />
+         </div>
+       );
+     }
+   }
+   export default Todo;
+   ```
+6. Adjust the React code by Deleting the logo and adjust App.js:
+   ```bash
+   cd ..
+   ```
+Make sure that you're in the src folder.
+Open App.js with any text editor.
+   ```bash
+   vim App.js
+   ```
+Copy and paste the code below into it
+   ```bash
+   
+   import React from 'react';
+   import Todo from './components/Todo';
+   import './App.css';
+   
+   const App = () => {
+     return (
+       <div className="App">
+         <Todo />
+       </div>
+     );
+   };
+   
+   export default App;
+   ```
+Open App.css 
+   ```bash
+   vim App.css
+   ```
+   Paste this
+   ```bash
+      .App {
+     text-align: center;
+     font-size: calc(10px + 2vmin);
+     width: 60%;
+     margin-left: auto;
+     margin-right: auto;
+   }
+   
+   input {
+     height: 40px;
+     width: 50%;
+     border: none;
+     border-bottom: 2px #101113 solid;
+     background: none;
+     font-size: 1.5rem;
+     color: #787a80;
+   }
+   
+   input:focus {
+     outline: none;
+   }
+   
+   button {
+     width: 25%;
+     height: 45px;
+     border: none;
+     margin-left: 10px;
+     font-size: 25px;
+     background: #101113;
+     border-radius: 5px;
+     color: #787a80;
+     cursor: pointer;
+   }
+   
+   button:focus {
+     outline: none;
+   }
+   
+   ul {
+     list-style: none;
+     text-align: left;
+     padding: 15px;
+     background: #171a1f;
+     border-radius: 5px;
+   }
+   
+   li {
+     padding: 15px;
+     font-size: 1.5rem;
+     margin-bottom: 15px;
+     background: #282c34;
+     border-radius: 5px;
+     overflow-wrap: break-word;
+     cursor: pointer;
+   }
+   
+   @media only screen and (min-width: 300px) {
+     .App {
+       width: 80%;
+     }
+   
+     input {
+       width: 100%;
+     }
+   
+     button {
+       width: 100%;
+       margin-top: 15px;
+       margin-left: 0;
+     }
+   }
+   
+   @media only screen and (min-width: 640px) {
+     .App {
+       width: 60%;
+     }
+   
+     input {
+       width: 50%;
+     }
+   
+     button {
+       width: 30%;
+       margin-left: 10px;
+       margin-top: 0;
+     }
+   }
+   ```
+Open ```index.js```
+   ```bash
+   vim index.js
+   ```
+Copy and paste
+   ```bash
+   body {
+     margin: 0;
+     padding: 0;
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     box-sizing: border-box;
+     background-color: #282c34;
+     color: #787a80;
+   }
+   
+   code {
+     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+   }
+   ```
+Go back to the   ```Todo``` directory
+   ```cd ../..```
+In the Todo directory run:
+   ```bash
+   npm run dev
+   ```
+Todo App is ready and fully functional
+
+<img width="1436" alt="my _todo" src="https://github.com/user-at
+<img width="1162" alt="todolist_test" src="https://github.com/user-attachments/assets/1304810a-438e-4511-a959-b51ac91253e6">
+tachments/assets/e7f3ce73-4c37-4428-8be9-e5c11b091e8d">
 
